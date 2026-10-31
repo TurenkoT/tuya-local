@@ -1,0 +1,56 @@
+name: Temperature and humidity sensor
+products:
+  - id: hodyryli
+    manufacturer: Tuya
+    model: T & H Sensor with external probe
+entities:
+  # Internal temperature (DP 1)
+  - entity: sensor
+    class: temperature
+    dps:
+      - id: 1
+        type: integer
+        name: sensor
+        unit: C
+        mapping:
+          - scale: 10
+        class: measurement
+
+  # Humidity (DP 2)
+  - entity: sensor
+    class: humidity
+    dps:
+      - id: 2
+        type: integer
+        name: sensor
+        unit: "%"
+        class: measurement
+
+  # Battery (DP 3) - Enum mapped to percentages
+  - entity: sensor
+    class: battery
+    category: diagnostic
+    dps:
+      - id: 3
+        type: string
+        name: sensor
+        mapping:
+          - dps_val: low
+            value: 10
+          - dps_val: middle
+            value: 50
+          - dps_val: high
+            value: 100
+
+  # External temperature (DP 38)
+  - entity: sensor
+    class: temperature
+    name: External temperature
+    dps:
+      - id: 38
+        type: integer
+        name: sensor
+        unit: C
+        mapping:
+          - scale: 10
+        class: measurement
